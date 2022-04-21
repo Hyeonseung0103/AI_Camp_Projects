@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title> 선수 정보</title>
+<head>
+<body>
+	<h1> 선수 입력 정보 </h1>
+			{% if ((games == None) or (mins==None)):  %}
+				<h4> 비어있는 정보가 있습니다. </h4>
+			{% else%}
+				 <table border ="1" width="50%" height=200 bgcolor=#11a9c1 bordercolor="white" cellspacing="5" 
+				 style="float:left; margin-right:10px;">
+
+      					<tr align="center" bgcolor="white">				         
+					<th>카테고리</th>
+				          <th>입력정보</th>
+				        </tr>
+
+        				{%for row in title_list%}
+      					<tr align="center" bgcolor="white">				         
+         				<td>{{row}}</td>
+						{% if loop.index == 2 %}
+	         				<td>{{fw_list[loop.index - 1]}}m</td>
+						{% else %}
+	         				<td>{{fw_list[loop.index - 1]}}</td>
+				        </tr>
+						{% endif %}
+		            {%endfor%}
+      				</table>
+				</div>
+				<div style="float:left; margin-left:150px;">
+					<h3> {{fw_list[0]}} 선수의 예상 몸값은 €{{results}}m	  입니다. </h3>
+					<center><img src= {{image}} width = "300" height = "300"/></center>
+					<form action = "/player_results" method = "GET">
+						
+						<br><center><input type = "submit" value = "분석 결과 보고서 보기"></center>
+					</form>				
+				</div>
+				
+			{% endif %}	
+
+</body>
+</html>

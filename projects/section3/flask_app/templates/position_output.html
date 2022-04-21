@@ -1,0 +1,131 @@
+<html>
+<head>
+	<title> 선수 정보</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+	$(document).ready(function()
+	{
+		var league_list=
+		[
+			"EPL", "LaLiga", "BundesLiga", "Serie_A","Ligue_1"
+		];
+
+		
+		$("#league").select2({
+			data:league_list
+		});
+
+		var n_list = 
+		[
+			
+		]
+
+		$("#name").select2({
+			data:n_list
+		});
+
+		var t_list = 
+		[
+			
+		]
+
+		$("#team").select2({
+			data:t_list
+		});
+
+
+		var c_list = 
+		[
+			
+		]
+
+		$("#country").select2({
+			data:c_list
+		});
+
+
+	});
+</script>
+</head>
+<body>
+	<h1> 선수 정보 입력 </h1>
+
+	<div>
+		<p>
+			{% if position == None %}
+				<h3> 포지션을 선택해주세요. </h3>
+			
+			{% elif position == "공격수" %}
+				<form action = "/fw_output" method = "GET">
+					<h4> 공격수 포지션을 선택하셨습니다. <h4>
+				<div>	이름 <select name = "name", id = "name">
+						<option value = "" selected hidden>-- 이름을 입력하세요 --</option>
+						{% for item in name_list %}
+            						<option> {{item['name']}} </option>
+        					{% endfor %}
+						
+					</select>
+				</div>
+				<br>
+				신장(m) <input placeholder = "ex) 1.78" required autocomplete="off" type = "text" name = "height" size = 5> <br>
+				
+				<br><div>국적 <select name = "country", id = "country">
+						<option value = "" selected hidden>-- 국적을 입력하세요 --</option>
+						{% for item in country_list %}
+            						<option> {{item['country']}} </option>
+        					{% endfor %}
+					</select>
+				</div>
+				<br>
+				나이      <input required autocomplete="off" type = "text" name = "age" size = 5><br>
+				
+				<br><div>리그 <select name = 'league', id = 'league'>
+						<option value = "" selected hidden>-- 리그를 고르세요 --</option>						
+					</select>
+				</div>
+				
+				<br>
+				<div>팀  <select name = "team", id = "team">
+						<option value = "" selected hidden>-- 팀을 입력하세요 --</option>
+						{% for item in team_list %}
+            						<option> {{item['team']}} </option>
+        					{% endfor %}
+					</select>
+				</div>
+				<br>
+				<div>포지션     <select name = 'detailed_position', id = 'detailed_position'>
+						<option value = "FW" selected>공격수</option>
+					</select>
+				</div>
+				<br>
+				<div>경기수     <input required autocomplete="off" type = "text" name = "games" maxlength=3 size = 5></div>
+				<br>
+				<div>뛴시간(분) <input required autocomplete="off" type = "text" name = "mins" size = 5></div>
+				<br>
+				<div>골    <input required autocomplete="off" type = "text" name = "goals" size = 5></div>
+				<br>				
+				<div>어시스트    <input required autocomplete="off" type = "text" name = "assists" size = 5></div>
+				<br>
+				<div>키패스    <input placeholder = "ex) 3.2" required autocomplete="off" type = "text" name = "key_passes" size = 5></div>
+				<br>
+				<div>평점    <input placeholder = "ex) 7.3" required autocomplete="off" type = "text" name = "rating" size = 5></div>
+					<br> <input type = "submit" value = "몸값예측">
+				</form>	
+			{% elif position == "미드필더" %}
+				<h3> 나중에 작업 예정	</h3>
+			{% elif position == "수비수" %}
+				<h3> 나중에 작업 예정	</h3>
+
+			{% elif position == "골키퍼" %}
+				<h3> 나중에 작업 예정	</h3>
+
+			{% endif %}
+		</p>
+	</div>
+	
+
+</body>
+</html>	
